@@ -4,6 +4,5 @@
 
 | Date  | Used hours | Subject(s) |  output |
 | :---         |     :---:      |     :---:      |     :---:      |
-| 30.10.2024 | 2 | Kick-off lecture  | Lecture recording  |
-| 31.10.2024 | 2 | Kick-off lecture  | Lecture recording  |
-| 30.10.2024 | 2 | Kick-off lecture  | Lecture recording  |
+
+| 8.2.2024 | 4 | portswigger |learning, doing labs, reporting |
