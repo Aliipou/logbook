@@ -1,70 +1,128 @@
-| Page / Feature	| Guest |	Reserver | Administrator |
-| :---         |     :---:      |     :---:      |     :---:      |
-| /	| | | |		
-| └─ View booked resources	| ❌	| ✅	| ✅ |
-| └─ Can see "Add a new resource" button | ❌	| ✅	| ✅ |
-| └─ Can see "Add a new reservation" button | ❌	| ✅	| ✅ |
-| /resources	| | | |	
-| └─ Create a new resource	| ⚠️(Note 3*)	| ✅	| ✅ |
-| └─ Can modify a resource	| ⚠️(Note 6*)	| ⚠️(Note 7*)	| ✅ |
-| /reservation	| | ⚠️(Note 4*) | |		
-| └─ Change a reserver from own booked resources	| ❌	| ⚠️(Note 1*)	| ✅ |
-| └─ Change a reserver from all booked resources	| ❌	| ❌	| ✅ |
-| └─ Change a reserved resource from own booked resources	| ❌	| ✅	| ✅ |
-| └─ Change a reserved resource from all booked resources	| ❌	| ❌	| ✅ |
-| └─ Change a reservation time from own booked resources	| ❌	| ✅(Note 2*)	| ✅(Note 2*) |
-| └─ Change a reservation time from all booked resources	| ❌	| ❌(Note 2*)	| ✅(Note 2*) |
-| └─ Create a new reservation	| ❌ | ✅ | ✅ |
-| /admin ⚠️(Note 5*)| | | |
-| /profile ⚠️(Note 5*)| | | |		
-| /login | | | |
-| └─ Can login	| ✅ | ✅ | ✅ |
-| /logout | | | |
-| └─ Can logout	| ❌ | ✅ | ✅ |
-| /register | | | |
-| └─ Can register	| ✅ | ✅ | ✅ |
+# 2025-03-23 ZAP-Report
 
-Symbols used:
-✅ Pass
-❌ Fail
-⚠️ Attention
+ZAP by [Checkmarx](https://checkmarx.com/).
 
-Notes:
 
-1. It's not good that a reserver user can change the reserver to whoever he/she wants
-2. Changing the reservation end time to smaller than start time throws an error
-3. Quest can add new resources if he/she goes directly to resources page
-4. Reserver can see all reservation forms even he/she is not the reserver when he/she goes directly to the page (e.g. http://localhost:8000/reservation?id=3). 
-5. Not implemented
-6. Quest can see empty form, but can't save anything
-7. Reserver cannot go to edit page via normal way, but can edit resources when he/she goes directly to the edit page
+## Summary of Alerts
 
-WFUZZ:
+| Risk Level | Number of Alerts |
+| --- | --- |
+| High | 0 |
+| Medium | 0 |
+| Low | 0 |
+| Informational | 1 |
 
-Sites found: logout, login, register, resources, reservation
-Api folders found: resources, session, users
-Reservation pages between 1-1000 found: 1-63 found (some numbers missing between them)
-The api page contains JSON data
 
-ZAP report:
 
-My PC couldn't handle the ZAP process well (It couldn't execute multiple test rounds). Virtual Box crashed multiple times so there is only the raport of one test round. 
-[Zap report](https://github.com/liskomes/musical-waffle/blob/main/The%20Booking%20System%20Phase%203/Zap%20report.md)
 
-Results:
+## Alerts
 
-✅ 1. The system is accessed via a web browser.
+| Name | Risk Level | Number of Instances |
+| --- | --- | --- |
+| User Agent Fuzzer | Informational | 12 |
 
-✅ 2. Users can register and, after registration, log in to the system.
 
-✅ 3. A registered and logged-in user acts as either a resource reserver or an administrator.
 
-⚠️ 4. The administrator can add, remove, and modify resources and reservations. ⚠️Reservers can also add/modify resources
 
-⚠️ 5. The administrator can delete the reserver. ⚠️Administrator and user can change the reserver
+## Alert Detail
 
-✅ 6. A reserver can book a resource if they are over 15 years old.
 
-✅ 7. Resources can be booked on an hourly basis.
 
-✅ 8. The booking system displays booked resources without requiring login, but does not show the reserver's identity
+### [ User Agent Fuzzer ](https://www.zaproxy.org/docs/alerts/10104/)
+
+
+
+##### Informational (Medium)
+
+### Description
+
+Check for differences in response based on fuzzed User Agent (eg. mobile sites, access as a Search Engine Crawler). Compares the response statuscode and the hashcode of the response body with the original response.
+
+* URL: http://localhost:8000/login
+  * Method: `GET`
+  * Parameter: `Header User-Agent`
+  * Attack: `Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1)`
+  * Evidence: ``
+  * Other Info: ``
+* URL: http://localhost:8000/login
+  * Method: `GET`
+  * Parameter: `Header User-Agent`
+  * Attack: `Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.0)`
+  * Evidence: ``
+  * Other Info: ``
+* URL: http://localhost:8000/login
+  * Method: `GET`
+  * Parameter: `Header User-Agent`
+  * Attack: `Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.1)`
+  * Evidence: ``
+  * Other Info: ``
+* URL: http://localhost:8000/login
+  * Method: `GET`
+  * Parameter: `Header User-Agent`
+  * Attack: `Mozilla/5.0 (Windows NT 10.0; Trident/7.0; rv:11.0) like Gecko`
+  * Evidence: ``
+  * Other Info: ``
+* URL: http://localhost:8000/login
+  * Method: `GET`
+  * Parameter: `Header User-Agent`
+  * Attack: `Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3739.0 Safari/537.36 Edg/75.0.109.0`
+  * Evidence: ``
+  * Other Info: ``
+* URL: http://localhost:8000/login
+  * Method: `GET`
+  * Parameter: `Header User-Agent`
+  * Attack: `Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36`
+  * Evidence: ``
+  * Other Info: ``
+* URL: http://localhost:8000/login
+  * Method: `GET`
+  * Parameter: `Header User-Agent`
+  * Attack: `Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:93.0) Gecko/20100101 Firefox/91.0`
+  * Evidence: ``
+  * Other Info: ``
+* URL: http://localhost:8000/login
+  * Method: `GET`
+  * Parameter: `Header User-Agent`
+  * Attack: `Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)`
+  * Evidence: ``
+  * Other Info: ``
+* URL: http://localhost:8000/login
+  * Method: `GET`
+  * Parameter: `Header User-Agent`
+  * Attack: `Mozilla/5.0 (compatible; Yahoo! Slurp; http://help.yahoo.com/help/us/ysearch/slurp)`
+  * Evidence: ``
+  * Other Info: ``
+* URL: http://localhost:8000/login
+  * Method: `GET`
+  * Parameter: `Header User-Agent`
+  * Attack: `Mozilla/5.0 (iPhone; CPU iPhone OS 8_0_2 like Mac OS X) AppleWebKit/600.1.4 (KHTML, like Gecko) Version/8.0 Mobile/12A366 Safari/600.1.4`
+  * Evidence: ``
+  * Other Info: ``
+* URL: http://localhost:8000/login
+  * Method: `GET`
+  * Parameter: `Header User-Agent`
+  * Attack: `Mozilla/5.0 (iPhone; U; CPU iPhone OS 3_0 like Mac OS X; en-us) AppleWebKit/528.18 (KHTML, like Gecko) Version/4.0 Mobile/7A341 Safari/528.16`
+  * Evidence: ``
+  * Other Info: ``
+* URL: http://localhost:8000/login
+  * Method: `GET`
+  * Parameter: `Header User-Agent`
+  * Attack: `msnbot/1.1 (+http://search.msn.com/msnbot.htm)`
+  * Evidence: ``
+  * Other Info: ``
+
+Instances: 12
+
+### Solution
+
+
+
+### Reference
+
+
+* [ https://owasp.org/wstg ](https://owasp.org/wstg)
+
+
+
+#### Source ID: 1
+
